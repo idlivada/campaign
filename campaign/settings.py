@@ -10,7 +10,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from campaign.secret import SECRET_KEY
+import campaign.secret as secret
+from secret import SECRET_KEY
 BASE_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'campaign/')
 
 # Quick-start development settings - unsuitable for production
@@ -22,7 +23,6 @@ DEBUG = True # TODO: Change this
 TEMPLATE_DEBUG = True # TODO: Change this
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -58,9 +58,9 @@ WSGI_APPLICATION = 'campaign.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'campaign',
-        'USER': 'haf',
-        'PASSWORD' : 'hafpassword',
+        'NAME': secret.MYSQL_DB,
+        'USER': secret.MYSQL_USER,
+        'PASSWORD' : secret.MYSQL_PASSWORD,
     }
 }
 
