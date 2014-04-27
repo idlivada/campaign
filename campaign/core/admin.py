@@ -1,5 +1,5 @@
 from django.contrib import admin
-from campaign.core.model import Campaign
+from campaign.core.models import Campaign
 
 class CampaignAdmin(admin.ModelAdmin):
     list_display = ('title', 'chamber')

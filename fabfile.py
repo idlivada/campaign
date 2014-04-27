@@ -1,25 +1,31 @@
-from fabric.api import run, cd, env, settings, hide, sudo, prompt, local
+from fabric.api import run, cd, env, settings, hide, sudo, prompt, local, put
 from fabric.contrib.files import exists
 from fabric.utils import warn
 
 env.hosts = ['root@162.243.102.184']
 
-homedir = "/var/www/campaigns"
+rootdir = "/var/www/"
+homedir = rootdir + "campaign/"
 
 def install():
-    run("apt-get install python-pip build-essential git")
+    run("apt-get install -y --no-upgrade python-pip build-essential git libmysqlclient-dev apache2 python-dev libapache2-mod-wsgi", shell=False)
     run("pip install --upgrade pip")
     run("pip install virtualenv")
-    run("apt-get install apache2")
     install_mysql()
+    install_code()
 
 def install_code():
-    if not exists(homedir):
-        run("mkdir %s" % homedir)
-    cd(homedir)
-    run("virtualenv env --no-site-packages")
-    run("git clone https://github.com/idlivada/callcampaign.git")
-    run("source %s/env/bin/activate && pip install -r %s/requirements.txt" % homedir)
+    if not exists(homedir+".git/"):
+        with cd(rootdir):
+            run("git clone https://github.com/idlivada/campaign.git")
+
+    with cd(homedir):
+        run("git pull")
+        run("virtualenv env --no-site-packages")
+        run("source %s/env/bin/activate && pip install -r %s/requirements.txt" % (homedir, homedir))
+        put("campaign/secret.py", homedir+"/campaign/")
+        
+    apache_restart()
 
 def install_mysql():
     with settings(hide('warnings', 'stderr'), warn_only=True):
@@ -35,7 +41,7 @@ def install_mysql():
     sudo('echo "mysql-server-5.0 mysql-server/root_password_again password ' \
                               '%s" | debconf-set-selections' % mysql_password)
     sudo('apt-get -y --no-upgrade install mysql-server', shell=False)
-    
+
 def apache_restart():
     sudo("service apache2 restart")
 
