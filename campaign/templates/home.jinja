@@ -1,0 +1,24 @@
+{% extends "base.jinja" %}
+
+{% block title %}Advocacy Campaign - Hindu American Foundation{% endblock %}
+
+{% block body %}
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Make your voice heard!</h1>
+        <p>Tell policymakers that you care about these critical issues affecting Hindu Americans.</p>
+      </div>
+
+
+      {% for campaign in campaigns %}
+      <section class="homepage-issue">
+	<div class="well">
+            <h1 class="title">{{ campaign.title }}</h1>
+            <p>{{ campaign.description }}</p>
+	    <a href="{{ campaign.get_absolute_url() }}"><button type="button" class="btn btn-lg btn-primary btn-call"><span class="glyphicon glyphicon-earphone"></span> <span class="btn-action-text">Make the call</span><br/>Click to call Congress now</button></a>
+	</div>
+      </section>
+      {% endfor %}
+
+{% endblock %}

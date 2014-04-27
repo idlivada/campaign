@@ -1,0 +1,13 @@
+.btn-action-text { 
+    font-size: 24px;
+    font-weight: bold;
+    text-transform:uppercase;
+}
+
+.homepage-issue .title {
+    margin-top: 10px;
+}
+
+.call-script {
+    font-size: 16pt;
+}

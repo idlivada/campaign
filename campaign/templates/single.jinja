@@ -1,0 +1,85 @@
+{% extends "base.jinja" %}
+
+{% block title %}{{ campaign.title }} - Hindu American Foundation{% endblock %}
+
+{% block body %}
+      <div class="jumbotron">
+        <h1>{{ campaign.title }}</h1>
+        <p>{{ campaign.description }} <a href="#" id="learn-more">Learn more about this issue.</a></p>
+	<div id="full-description">{{ campaign.get_formatted_full_description()|safe }}</div>
+      </div>
+
+      <div id="progress-area">
+	<h2>Your Outreach Progress:</h2>
+	<div class="progress">
+	  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+	  </div>
+	</div>
+      </div>
+
+      <section id="action-area">
+      	<div class="well" id="contact-info">
+	  <h2>Identify your elected officials</h2>
+
+	  <p>Enter your contact information below, so we can find the contact information for your members of Congress.</p>
+	  <form action="#" id="form-contact" class="form-inline" role="form">
+	    <div class="form-group">
+	      <input type="text" class="contactinfo form-control" placeholder="First Name" id="fname"/>
+	    </div>
+	    <div class="form-group">
+	      <input type="text" class="contactinfo form-control" placeholder="Last Name" id="lname"/>	  	  
+	    </div>
+	    <div class="form-group">
+	      <input type="text" class="contactinfo form-control" placeholder="Email" id="email"/>
+	    </div>
+	    <div class="form-group">
+	      <input type="text" class="contactinfo form-control" maxlength="5" placeholder="ZIP Code" id="zipcode"/>
+	    </div>
+	    <div class="form-group">
+	      <input type="text" class="contactinfo form-control" placeholder="Phone Number" id="phone"/>	  	  
+	    </div>
+	    <input type="hidden" class="contactinfo" id="chamber" value="senate"/>	  	  
+	    <a href="{{ campaign.permalink }}"><button type="submit" id="btn-contact-find" class="btn btn-lg btn-primary btn-call">Go</button></a>
+	  </form>
+	</div>
+
+	  <div id="alert" class="alert alert-info">
+	    Use a phone number where you can be reached at this moment, so we can properly route the call.
+	  </div>
+
+      </section>
+
+      <section class="cong_template cong-section" style="display: none;">
+	<div class="well">
+	<h2 class="cong_name"></h2>
+	<button type="button" class="btn btn-lg btn-primary btn-call btn-progress-action" data-toggle="modal" data-target="#call-template"><span class="glyphicon glyphicon-earphone"></span> <span class="btn-action-text">Make the call</span><br/>Click to call now</button>
+	<a href="{{ campaign.permalink }}"><button type="button" class="btn btn-lg btn-primary btn-tweet btn-progress-action"><span class="glyphicon glyphicon-hand-up"></span> <span class="btn-action-text btn-tweet-text"></span><br/>Click to tweet now</button></a>
+	</div>
+      </section>
+
+
+      <div id="tweet_template" style="display: none;">{{ campaign.tweet_text }} {{ campaign.short_url }}</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="call-template">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Here's what to say</h4>
+      </div>
+      <div class="modal-body">
+	<p>You will will receive a call to connect you with a staff member from the office of <span class="cong-name"></span> momentarily. When you are connected to their office, please leave a message using the following script:</p>
+	<p class="call-script">
+	  {{ campaign.get_formatted_script()|safe }}
+	</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
