@@ -9,7 +9,7 @@ from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 
 import campaign.secret as secret
-import campaign.settins as settings
+import campaign.settings as settings
 from campaign.core.models import Campaign
 
 def home(request):
