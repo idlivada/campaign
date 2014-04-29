@@ -63,9 +63,13 @@
 </ul><h3>
 <a name="pre-deployment" class="anchor" href="#pre-deployment"><span class="octicon octicon-link"></span></a>Pre-Deployment</h3>
 
-<ol>
-<li>Provision a Ubuntu box (tested on 14.04 LTS x64 but should works on other versions) where you would like the app to run in production with ssh access enabled. Recommend using Digital Ocean for a quick option here.</li>
-</ol><h3>
+<p><em>Provision your deployment (preferably Ubuntu)</em> (tested on 14.04 LTS x64 but should works on other versions) where you would like the app to run in production with ssh access enabled. Recommend using Digital Ocean for a quick option here.</p>
+
+<p><em>Get a Twilio Account</em>. Write down the SID and Token for this application.  You will need it in the set up process.  You will also need to fund your account to be able to call external parties such as members of Congress, so the free account will not suffice.</p>
+
+<p><em>Get a Sunlight Foundation API Key</em>.  You will need this in the set up foundation.</p>
+
+<h3>
 <a name="deployment" class="anchor" href="#deployment"><span class="octicon octicon-link"></span></a>Deployment</h3>
 
 <p>Deploying to product is very easy. Simply follow the below steps:</p>
@@ -101,6 +105,13 @@ $ source env/bin/activate
 $ python campaign/manage.py syncdb
 $ python campaign/manage.py migrate core
 </code></pre>
+
+<h3>
+<a name="setting-up-your-application" class="anchor" href="#setting-up-your-application"><span class="octicon octicon-link"></span></a>Setting up your Application</h3>
+
+<p>You should now see your app running in your web browser.</p>
+
+<p>You can now go and create your first campaign via the django admin interface /admin/ in your browser.</p>
       </section>
     </div>
 
