@@ -65,9 +65,18 @@
 <p>Deploying to product is very easy. Simply follow the below steps.</p>
 
 <ol>
-<li><p>Provision a Ubuntu box (tested on 14.04 LTS x64 but should works on other versions) where you would like the app to run in production.</p></li>
-<li>
-</ol><pre><code>$ cd your_repo_root/repo_name
+<li><p>Provision a Ubuntu box (tested on 14.04 LTS x64 but should works on other versions) where you would like the app to run in production with ssh access enabled. Recommend using Digital Ocean for a quick option here.</p></li>
+<li><p>Edit fabfile.py and set the env.hosts to <a href="mailto:root@IP_ADDRESS_OF_THE_UBUNTU_BOX">root@IP_ADDRESS_OF_THE_UBUNTU_BOX</a>.<br>
+You can optionally customize the other variable and paths below env.hosts, but this should not be required if you are using the default Ubuntu settings.</p></li>
+<li><p>On your shell, run the following:</p></li>
+</ol><pre><code>$ fab install
+</code></pre>
+
+<p>Follow the instructions and prompts.  It's recommended that you setup the database when prompted on the initial deployment as well.</p>
+
+<p>4.</p>
+
+<pre><code>$ cd your_repo_root/repo_name
 $ git fetch origin
 $ git checkout gh-pages
 </code></pre>
