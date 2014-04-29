@@ -1,0 +1,22 @@
+<VirtualHost *:80>
+ServerName {{ servername }}
+
+WSGIScriptAlias / {{ homedir }}campaign/wsgi.py
+WSGIDaemonProcess {{ servername }} python-path={{ homedir }}:{{ homedir }}campaign/:{{ homedir }}env/lib/python2.7/site-packages
+WSGIProcessGroup {{ servername }}
+
+<Directory {{ homedir }}campaign/>
+<Files wsgi.py>
+Require all granted
+</Files>
+</Directory>
+
+Alias /robots.txt {{ homedir }}campaign/static/robots.txt
+Alias /favicon.ico {{ homedir }}campaign/static/favicon.ico
+Alias /static/admin/ {{ homedir }}env/lib/python2.7/site-packages/django/contrib/admin/static/admin/
+Alias /static/ {{ homedir }}campaign/static/
+<Directory {{ homedir }}campaign/static>
+Require all granted
+</Directory>
+
+</VirtualHost>
