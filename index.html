@@ -40,7 +40,34 @@
 
 <p>This project makes is easy for an advocacy organization to quickly and easily launch a call campaign among a large member base on a specific set of designated issues.  Using this app, you can enable your audience to easily identify their member of the House or Senate, and be connected with them via phone by them simply clicking a button in their web browser.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
+<h3>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h3>
+
+<p>In order to use the out of the box deployment, you need to have the following libraries pre-iinstalled</p>
+
+<ul>
+<li>Python 2.7 (other versions should work with some modifications)</li>
+<li>fabric</li>
+<li>Jinja2</li>
+</ul><p>Other miscellaneous libraries used but not required (see requirements.txt for full listing).  </p>
+
+<ul>
+<li>Django 1.6</li>
+<li>Twilio API</li>
+<li>Sunlight Foundation API</li>
+<li>MySQL</li>
+<li>South</li>
+<li>Docutils</li>
+<li>virtualenv</li>
+</ul><h3>
+<a name="deployment" class="anchor" href="#deployment"><span class="octicon octicon-link"></span></a>Deployment</h3>
+
+<p>Deploying to product is very easy. Simply follow the below steps.</p>
+
+<ol>
+<li><p>Provision a Ubuntu box (tested on 14.04 LTS x64 but should works on other versions) where you would like the app to run in production.</p></li>
+<li>
+</ol><pre><code>$ cd your_repo_root/repo_name
 $ git fetch origin
 $ git checkout gh-pages
 </code></pre>
