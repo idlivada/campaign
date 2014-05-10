@@ -38,7 +38,7 @@
 	    <div class="form-group">
 	      <input type="text" class="contactinfo form-control" placeholder="Phone Number" id="phone"/>	  	  
 	    </div>
-	    <input type="hidden" class="contactinfo" id="chamber" value="senate"/>	  	  
+	    <input type="hidden" class="contactinfo" id="chamber" value="{{ campaign.chamber }}"/>	  	  
 	    <a href="{{ campaign.permalink }}"><button type="submit" id="btn-contact-find" class="btn btn-lg btn-primary btn-call">Go</button></a>
 	  </form>
 	</div>

@@ -54,7 +54,6 @@ def install_mysql():
                  '%s" | debconf-set-selections' % root_password)
         sudo('apt-get -y --no-upgrade install mysql-server', shell=False)
 
-
     # DB set up
     db_setup = prompt('Setup database [y/n]?')
     if db_setup == 'y':
@@ -75,12 +74,15 @@ def install_mysql():
         secrets['tw_sid'] = prompt('Enter Twilio sid:')
         secrets['tw_token'] = prompt('Enter Twilio token:')
         secrets['tw_caller_id'] = prompt('Enter Twilio caller id (e.g. +15555555555):')
+        print "The below number will be called when debugging rather than calling a member of Congress. Usually this is your phone number."
+        secrets['debug_phone'] = prompt('Enter debug phone number (e.g. +15555555555):')
         secrets['BASE_URL'] = prompt('Enter base URL e.g. (http://campaign.example.com/:')
         secrets['SECRET_KEY'] = generate_secret_key()
         secrets['MYSQL_USER'] = username
         secrets['MYSQL_PASSWORD'] = password
         secrets['MYSQL_DB'] = dbname
         secrets['STATIC_ROOT'] = homedir + 'static/'
+        secrets['sunlight_api_key'] = prompt('Sunlight Foundation API Key:')
         temp_path = 'secret.temp'
         f = open(temp_path, 'w')
         for key, value in secrets.iteritems():
@@ -89,8 +91,6 @@ def install_mysql():
         put(temp_path, secret_path)
         os.remove(temp_path)
     # TODO: Sunlight Foundation API key
-
-    # Now go to homedir, export PYTHONPATH=$(pwd); python campaign/manage.py syncdb; python campaign/manage.py migrate core
 
 def generate_secret_key():
     return "".join([random.SystemRandom().choice(string.digits + string.letters + string.punctuation) for i in range(100)])

@@ -12,6 +12,8 @@ import campaign.secret as secret
 import campaign.settings as settings
 from campaign.core.models import Campaign
 
+sunlight.config.API_KEY = secret.sunlight_api_key
+
 def home(request):
     context = {'campaigns' : Campaign.objects.all()}
     return render(request, 'home.jinja', context)
