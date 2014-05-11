@@ -66,4 +66,4 @@ You can now go and create your first campaign via the django admin interface /ad
 The organization name, and other copy text have not been generalized yet.  To better customize these, edit the files in the templates/ directory to meet your needs.
 
 ### Going Live
-When you are ready to go live. Here's follow the [Django deployment checklist https://docs.djangoproject.com/en/dev/howto/deployment/checklist/] to set proper security settings.
+When you are ready to go live. Here's follow the Django deployment checklist https://docs.djangoproject.com/en/dev/howto/deployment/checklist/ to set proper security settings.
