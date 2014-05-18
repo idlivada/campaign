@@ -11,16 +11,16 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import campaign.secret as secret
-from secret import SECRET_KEY, STATIC_ROOT
+from secret import SECRET_KEY
 BASE_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'campaign/')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True # TODO: Change this
+DEBUG = True
 
-TEMPLATE_DEBUG = True # TODO: Change this
+TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 

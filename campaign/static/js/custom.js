@@ -7,9 +7,12 @@ $(document).ready(function () {
 	var valid = form_input_set_color($('#fname'), $('#fname').val())
 	valid &= form_input_set_color($('#lname'), $('#lname').val());
 	valid &= form_input_set_color($('#email'), email_re.test($('#email').val()));
+	valid &= form_input_set_color($('#street'), $('#street').val());
+	valid &= form_input_set_color($('#city'), $('#city').val());
+	valid &= form_input_set_color($('#state'), $('#state').val().length == 2);
 	valid &= form_input_set_color($('#zipcode'), zip_re.test($('#zipcode').val()));
 	valid &= form_input_set_color($('#phone'), valid_phone($('#phone').val()));
-
+	
 	console.log(valid);
 	if(valid) {
  	    $('#btn-contact-find').removeAttr('disabled');	
@@ -44,7 +47,7 @@ $(document).ready(function () {
     $('#form-contact').submit(function(e) {
 	e.preventDefault();
 	params = {}
-	// TODO: Validate
+
 	$('input.contactinfo').each(function(i, e) { 
 	    params[e.id] = $(e).val(); 
 	});

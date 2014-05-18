@@ -3,6 +3,8 @@ import json
 import sunlight
 import twilio
 import twilio.rest
+import urllib
+import csv
 
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
@@ -19,8 +21,8 @@ def home(request):
     return render(request, 'home.jinja', context)
 
 def locator(request):
+    chamber = request.GET.get('chamber')    
     zipcode = request.GET.get('zipcode')
-    chamber = request.GET.get('chamber')
     
     if not zipcode or not re.search(r'^(\d{5}(\-\d{4})?)$', zipcode):
         return HttpResponse('Invalid zipcode', status=422)
@@ -28,7 +30,9 @@ def locator(request):
     if chamber and (not chamber == 'senate' and not chamber == 'house'):
         return HttpResponse('Invalid chamber', status=422)
 
-    data = sunlight.congress.locate_legislators_by_zip(zipcode)
+    params = [request.GET.get(p) for p in ['street','city','state','zipcode']]
+    lat_lon = geocode(*params)
+    data = sunlight.congress.locate_legislators_by_lat_lon(*lat_lon)
     
     if not data:
         return HttpResponse('Could not find legislator', status=422)
@@ -84,3 +88,21 @@ def single_campaign(request, slug):
     except Campaign.DoesNotExist:
         raise Http404
     return render(request, 'single.jinja', context)
+
+
+def geocode(street, city, state, zipcode):
+    endpoint = 'http://geoservices.tamu.edu/Services/Geocode/WebService/GeocoderWebServiceHttpNonParsed_V04_01.aspx?'
+    params = urllib.urlencode({'apiKey' : secret.tamu_api_key,
+                               'version' : '4.01',
+                               'censusYear' : '2010',
+                               'streetAddress' : street,
+                               'city' : city,
+                               'state' : state,
+                               'zip' : zipcode})
+    r = urllib.urlopen(endpoint+params)
+    for row in csv.reader(r):
+        pass
+    r.close()
+
+    return row[3], row[4]
+        

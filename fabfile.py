@@ -81,8 +81,9 @@ def install_mysql():
         secrets['MYSQL_USER'] = username
         secrets['MYSQL_PASSWORD'] = password
         secrets['MYSQL_DB'] = dbname
-        secrets['STATIC_ROOT'] = homedir + 'static/'
         secrets['sunlight_api_key'] = prompt('Sunlight Foundation API Key:')
+        secrets['tamu_api_key'] = prompt('TAMU Geocoding API Key:')
+
         temp_path = 'secret.temp'
         f = open(temp_path, 'w')
         for key, value in secrets.iteritems():
@@ -90,7 +91,6 @@ def install_mysql():
         f.close()
         put(temp_path, secret_path)
         os.remove(temp_path)
-    # TODO: Sunlight Foundation API key
 
 def generate_secret_key():
     return "".join([random.SystemRandom().choice(string.digits + string.letters + string.punctuation) for i in range(100)])
