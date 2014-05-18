@@ -29,6 +29,8 @@ Other miscellaneous libraries used but not required (see requirements.txt for fu
 
 *Get a Sunlight Foundation API Key*.  You will need this in the set up process.
 
+*Get a Texas A&M University Geocoding API Key (TAMU)*. https://geoservices.tamu.edu/.  By default, the application will properly attribute their service so you can register as a partner, and if approved get unlimited API calls.
+
 *Set up DNS*.  Create a domain or subdomain with an A record pointing to the IP of the production box you provisioned.
 
 ### Deployment
