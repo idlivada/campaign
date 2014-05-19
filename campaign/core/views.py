@@ -9,15 +9,16 @@ import csv
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.admin.views.decorators import staff_member_required
 
 import campaign.secret as secret
 import campaign.settings as settings
-from campaign.core.models import Campaign
+from campaign.core.models import Campaign, Member
 
 sunlight.config.API_KEY = secret.sunlight_api_key
 
 def home(request):
-    context = {'campaigns' : Campaign.objects.all()}
+    context = {'campaigns' : Campaign.objects.all().order_by('-id')}
     return render(request, 'home.jinja', context)
 
 def locator(request):
@@ -36,6 +37,21 @@ def locator(request):
     
     if not data:
         return HttpResponse('Could not find legislator', status=422)
+
+    email = request.GET.get('email').lower()
+    try:
+        member = Member.objects.get(email=email)
+    except Member.DoesNotExist:
+        member = Member(email=email)
+    member.firstname = request.GET.get('fname')
+    member.lastname = request.GET.get('lname')
+    member.phone = re.sub("[^0-9]","",request.GET.get('phone'))
+    member.street = request.GET.get('street')
+    member.city = request.GET.get('city')
+    member.state = request.GET.get('state')
+    member.zipcode = request.GET.get('zipcode')
+    print member.firstname
+    member.save()
 
     if chamber:
         data = [x for x in data if x['chamber'] == chamber]
@@ -105,4 +121,4 @@ def geocode(street, city, state, zipcode):
     r.close()
 
     return row[3], row[4]
-        
+

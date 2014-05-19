@@ -11,3 +11,7 @@
 .call-script {
     font-size: 16pt;
 }
+
+#privacy { 
+    display:none;
+}

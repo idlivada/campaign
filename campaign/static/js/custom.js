@@ -130,4 +130,9 @@ $(document).ready(function () {
 	glyph.addClass('glyphicon-check');
     }
 
+    $('#privacy-link').click(function(e) {
+	e.preventDefault();
+	$('#privacy').show();
+	$('#privacy-blurb').hide();
+    });
 });

@@ -50,3 +50,15 @@ class Campaign(models.Model):
             u.close()
 
         super(Campaign, self).save(*args, **kwargs)
+
+class Member(models.Model):
+    firstname = models.CharField(max_length=35)
+    lastname = models.CharField(max_length=35)
+    street = models.CharField(max_length=255)
+    city = models.CharField(max_length=35)
+    state = models.CharField(max_length=2)
+    zipcode = models.CharField(max_length=5)
+    email = models.CharField(max_length=100, unique=True)
+    phone = models.CharField(max_length=10)
+    
+    
