@@ -9,7 +9,6 @@ import csv
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.admin.views.decorators import staff_member_required
 
 import campaign.secret as secret
 import campaign.settings as settings
