@@ -49,7 +49,7 @@
 	      <input type="text" class="contactinfo form-control" placeholder="Phone Number" id="phone"/>	  	  
 	    </div>
 	    <input type="hidden" class="contactinfo" id="chamber" value="{{ campaign.chamber }}"/>	  	  
-	    <a href="{{ campaign.permalink }}"><button type="submit" id="btn-contact-find" class="btn btn-lg btn-primary btn-call">Go</button></a>
+	    <a href="{{ campaign.permalink }}"><input type="submit" value="Go" id="btn-contact-find" class="btn btn-lg btn-primary btn-call"/></a>
 	  </form>
 	<p id="privacy-blurb">Your contact information will not be sold or rented to any third parties. For more information, see our <a href="#" id="privacy-link">Privacy Policy</a>.</p>
 	<p id="privacy">Privacy Policy: HAF does not collect on this site personally identifiable information, including without limitation, your name, address, phone number or e-mail address, unless provided by you. This information is stored securely only for as long as it is required for the purpose for which it has been provided and is kept confidential unless sharing with a third party is required to effectuate the purpose and objectives for which the information has been provided or where sharing it is required by law. Under no circumstances will the information provided by you be sold or rented to any third parties.</p>
@@ -81,7 +81,7 @@
         <h4 class="modal-title" id="myModalLabel">Here's what to say</h4>
       </div>
       <div class="modal-body">
-	<p>You will will receive a call to connect you with a staff member from the office of <span class="cong-name"></span> momentarily. When you are connected to their office, please leave a message using the following script:</p>
+	<p>You will receive a call to connect you with a staff member from the office of <span class="cong-name"></span> momentarily. When you are connected to their office, please leave a message using the following script:</p>
 	<p class="call-script">
 	  {{ campaign.get_formatted_script()|safe }}
 	</p>

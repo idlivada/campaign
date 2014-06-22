@@ -12,14 +12,14 @@ $(document).ready(function () {
 	valid &= form_input_set_color($('#state'), $('#state').val().length == 2);
 	valid &= form_input_set_color($('#zipcode'), zip_re.test($('#zipcode').val()));
 	valid &= form_input_set_color($('#phone'), valid_phone($('#phone').val()));
-	
-	console.log(valid);
+
 	if(valid) {
- 	    $('#btn-contact-find').removeAttr('disabled');	
+ 	    $('#btn-contact-find').css('visibility', 'visible');
 	} else {
- 	    $('#btn-contact-find').attr('disabled', 'disabled');	
+ 	    $('#btn-contact-find').css('visibility', 'hidden');
 	}
     });
+
 
     function valid_phone(phone) {
 	var match = phone.match(/\d/g);
@@ -45,7 +45,6 @@ $(document).ready(function () {
     }
 
     $('#form-contact').submit(function(e) {
-	e.preventDefault();
 	params = {}
 
 	$('input.contactinfo').each(function(i, e) { 
@@ -76,6 +75,7 @@ $(document).ready(function () {
 		$('#action-area').append(cong_section);	
 	    });
 	});
+	return false;
     });
     
     $('section.cong-section .btn-call').click(function(e) {
@@ -113,7 +113,7 @@ $(document).ready(function () {
     $('#alert').hide();
     $('#full-description').hide();
     $('#progress-area').hide();
-    $('#btn-contact-find').attr('disabled', 'disabled');
+    $('#btn-contact-find').css('visibility', 'hidden');
 
     function update_progress() {
 	var total = $('section.cong-active .btn-progress-action').length;
