@@ -77,7 +77,6 @@ def install_mysql():
         print "The below number will be called when debugging rather than calling a member of Congress. Usually this is your phone number."
         secrets['debug_phone'] = prompt('Enter debug phone number (e.g. +15555555555):')
         secrets['BASE_URL'] = prompt('Enter base URL (e.g. http://campaign.example.com/):')
-        secrets['SESSION_COOKIE_DOMAIN'] = prompt('Enter root domain (e.g. campaign.example.com):')
         secrets['SECRET_KEY'] = generate_secret_key()
         secrets['MYSQL_USER'] = username
         secrets['MYSQL_PASSWORD'] = password
