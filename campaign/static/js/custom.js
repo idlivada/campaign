@@ -82,7 +82,7 @@ $(document).ready(function () {
 	e.preventDefault();
 	var cong_data = $(e.target).parents('section.cong-section').data('cong_data');
 	var params = {'cong_id' : cong_data['bioguide_id'],
-		      'phone'   : $('#phone').val()}
+		      'phone'   : $('#phone').val().replace(/\D/g, '')};
 
 	$('#call-template .cong-name').html(cong_data['fullname']);
 	$('#call-template .your-name').html($('#fname').val()+' '+$('#lname').val());
