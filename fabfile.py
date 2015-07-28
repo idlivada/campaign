@@ -83,6 +83,11 @@ def install_mysql():
         secrets['MYSQL_DB'] = dbname
         secrets['sunlight_api_key'] = prompt('Sunlight Foundation API Key:')
         secrets['tamu_api_key'] = prompt('TAMU Geocoding API Key:')
+        secrets['EMAIL_HOST'] = prompt('Email Host (e.g. smtp.gmail.com):')
+        secrets['EMAIL_HOST_USER'] = prompt('Email Host user (e.g. you@gmail.com)')
+        secrets['EMAIL_PASSWORD'] = prompt('Email password:')
+        secrets['EMAIL_PORT'] = int(prompt('Email Port (e.g. 587):'))
+        secrets['EMAIL_USE_TLS'] = prompt('Email use TLS (Y,N):' == 'Y')
 
         temp_path = 'secret.temp'
         f = open(temp_path, 'w')
