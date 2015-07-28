@@ -9,6 +9,7 @@ import csv
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
+from django.core.mail import send_mail
 
 import campaign.secret as secret
 import campaign.settings as settings
@@ -49,13 +50,17 @@ def locator(request):
     member.city = request.GET.get('city')
     member.state = request.GET.get('state')
     member.zipcode = request.GET.get('zipcode')
-    print member.firstname
     member.save()
 
     if chamber:
         data = [x for x in data if x['chamber'] == chamber]
     else:
         data = list(data)
+
+    subject = "New Call Campaign Member: %s %s" % (member.firstname, member.lastname)
+    message = '\n'.join(["%s: %s"% (k , v) for k, v in request.GET.iteritems()])
+    send_mail(subject, message, 'no-reply@hafsite.org', 
+              ['pawan@hafsite.org'], fail_silently=False)
 
     return HttpResponse(json.dumps(data), content_type="application/json")
 
@@ -74,7 +79,7 @@ def call(request):
     client.calls.create(to="+1{%s}" % phone, 
                         from_=secret.tw_caller_id,
                         url=secret.BASE_URL + "dial-callback/?cong_id=%s" % cong_id)
-    
+
     return HttpResponse()
 
 @csrf_exempt
