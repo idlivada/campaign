@@ -6,13 +6,14 @@ from fabric.api import run, cd, env, settings, hide, sudo, prompt, local, put
 from fabric.contrib.files import exists, upload_template
 from fabric.utils import warn
 
-env.hosts = ['root@162.243.102.184']
+env.hosts = ['root@104.131.86.84']
 
 rootdir = "/var/www/"
 homedir = rootdir + "campaign/"
 apache_conf = '/etc/apache2/sites-enabled/campaign.conf'
 
 def install():
+    run("apt-get update")
     run("apt-get install -y --no-upgrade python-pip build-essential git libmysqlclient-dev apache2 python-dev libapache2-mod-wsgi", shell=False)
     run("pip install --upgrade pip")
     run("pip install virtualenv")
@@ -87,7 +88,7 @@ def install_mysql():
         secrets['EMAIL_HOST_USER'] = prompt('Email Host user (e.g. you@gmail.com)')
         secrets['EMAIL_PASSWORD'] = prompt('Email password:')
         secrets['EMAIL_PORT'] = int(prompt('Email Port (e.g. 587):'))
-        secrets['EMAIL_USE_TLS'] = prompt('Email use TLS (Y,N):' == 'Y')
+        secrets['EMAIL_USE_TLS'] = prompt('Email use TLS (Y,N):') == 'Y'
         secrets['ORGANIZATION_NAME'] = prompt('Organization Name (e.g. Hindu American Foundation):')
         secrets['ORGANIZATION_URL'] = prompt('Organization URL (e.g. http://hafsite.org/:')
         secrets['ORGANIZATION_FROM_EMAIL'] = prompt('Organization From Email (e.g. no-reply@hafsite.org:')
