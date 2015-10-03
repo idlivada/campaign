@@ -1,6 +1,6 @@
 {% extends "base.jinja" %}
 
-{% block title %}{{ campaign.title }} - Hindu American Foundation{% endblock %}
+{% block title %}{{ campaign.title }} - {{ org_name }}{% endblock %}
 
 {% block body %}
       <div class="jumbotron">
@@ -52,7 +52,7 @@
 	    <a href="{{ campaign.permalink }}"><input type="submit" value="Go" id="btn-contact-find" class="btn btn-lg btn-primary btn-call"/></a>
 	  </form>
 	<p id="privacy-blurb">Your contact information will not be sold or rented to any third parties. For more information, see our <a href="#" id="privacy-link">Privacy Policy</a>.</p>
-	<p id="privacy">Privacy Policy: HAF does not collect on this site personally identifiable information, including without limitation, your name, address, phone number or e-mail address, unless provided by you. This information is stored securely only for as long as it is required for the purpose for which it has been provided and is kept confidential unless sharing with a third party is required to effectuate the purpose and objectives for which the information has been provided or where sharing it is required by law. Under no circumstances will the information provided by you be sold or rented to any third parties.</p>
+	<p id="privacy">Privacy Policy: {{ org_name }} does not collect on this site personally identifiable information, including without limitation, your name, address, phone number or e-mail address, unless provided by you. This information is stored securely only for as long as it is required for the purpose for which it has been provided and is kept confidential unless sharing with a third party is required to effectuate the purpose and objectives for which the information has been provided or where sharing it is required by law. Under no circumstances will the information provided by you be sold or rented to any third parties.</p>
 	  
 	</div>
 

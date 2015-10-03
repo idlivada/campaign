@@ -18,7 +18,9 @@ from campaign.core.models import Campaign, Member
 sunlight.config.API_KEY = secret.sunlight_api_key
 
 def home(request):
-    context = {'campaigns' : Campaign.objects.all().order_by('-id')}
+    context = {'campaigns' : Campaign.objects.all().order_by('-id'),
+               'org_name' : secret.ORGANIZATION_NAME,
+               'org_url' : secret.ORGANIZATION_URL}
     return render(request, 'home.jinja', context)
 
 def locator(request):
@@ -94,6 +96,7 @@ def dial_callback(request):
 
     context = {}
     context['cong_name'] = '%s %s %s' % (title, cong_data['first_name'], cong_data['last_name'])
+    context['org_name'] = secret.ORGANIZATION_NAME
     
     if settings.DEBUG:
         context['cong_phone'] = secret.debug_phone
@@ -104,7 +107,9 @@ def dial_callback(request):
     
 def single_campaign(request, slug):
     try:
-        context = {'campaign' : Campaign.objects.get(slug=slug)}
+        context = {'campaign' : Campaign.objects.get(slug=slug),
+                   'org_name' : secret.ORGANIZATION_NAME,
+                   'org_url' : secret.ORGANIZATION_URL}
     except Campaign.DoesNotExist:
         raise Http404
     return render(request, 'single.jinja', context)
