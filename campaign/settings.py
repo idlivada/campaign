@@ -22,7 +22,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [secret.ALLOWED_HOST]
 
 # Application definition
 

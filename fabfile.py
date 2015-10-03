@@ -90,7 +90,9 @@ def install_mysql():
         secrets['EMAIL_USE_TLS'] = prompt('Email use TLS (Y,N):' == 'Y')
         secrets['ORGANIZATION_NAME'] = prompt('Organization Name (e.g. Hindu American Foundation):')
         secrets['ORGANIZATION_URL'] = prompt('Organization URL (e.g. http://hafsite.org/:')
-
+        secrets['ORGANIZATION_FROM_EMAIL'] = prompt('Organization From Email (e.g. no-reply@hafsite.org:')
+        secrets['ORGANIZATION_NOTIFICATION_EMAIL'] = prompt('Organization Notification Email (e.g. info@hafsite.org):')
+        secrets['ALLOWED_HOST'] = prompt('Domain for the site (e.g. campaign.hafsite.org:')
         temp_path = 'secret.temp'
         f = open(temp_path, 'w')
         for key, value in secrets.iteritems():

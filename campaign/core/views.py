@@ -61,8 +61,8 @@ def locator(request):
 
     subject = "New Call Campaign Member: %s %s" % (member.firstname, member.lastname)
     message = '\n'.join(["%s: %s"% (k , v) for k, v in request.GET.iteritems()])
-    send_mail(subject, message, 'no-reply@hafsite.org', 
-              ['pawan@hafsite.org'], fail_silently=False)
+    send_mail(subject, message, secret.ORGANIZATION_FROM_EMAIL, 
+              [secret.ORGANIZATION_NOTIFICATION_EMAIL], fail_silently=False)
 
     return HttpResponse(json.dumps(data), content_type="application/json")
 
