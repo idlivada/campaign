@@ -30,7 +30,7 @@ def locator(request):
     if not zipcode or not re.search(r'^(\d{5}(\-\d{4})?)$', zipcode):
         return HttpResponse('Invalid zipcode', status=422)
     
-    if chamber and chamber in [choice[0] for choice in Campaign.CHAMBER_CHOICES]:
+    if not chamber or not chamber in [choice[0] for choice in Campaign.CHAMBER_CHOICES]:
         return HttpResponse('Invalid chamber', status=422)
 
     params = [request.GET.get(p) for p in ['street','city','state','zipcode']]
