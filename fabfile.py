@@ -95,6 +95,8 @@ def install_mysql():
         secrets['EMAIL_PASSWORD'] = prompt('Email password:')
         secrets['EMAIL_PORT'] = int(prompt('Email Port (e.g. 587):'))
         secrets['EMAIL_USE_TLS'] = prompt('Email use TLS (Y,N):') == 'Y'
+        secrets['EMAIL_NOTIFICATION_ENABLED'] = prompt('Email notifications enabbled (Y,N):') == 'Y'
+
         secrets['ORGANIZATION_NAME'] = prompt('Organization Name (e.g. Hindu American Foundation):')
         secrets['ORGANIZATION_URL'] = prompt('Organization URL (e.g. http://hafsite.org/:')
         secrets['ORGANIZATION_FROM_EMAIL'] = prompt('Organization From Email (e.g. no-reply@hafsite.org:')
