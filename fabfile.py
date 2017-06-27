@@ -13,6 +13,9 @@ homedir = rootdir + "campaign/"
 apache_conf = '/etc/apache2/sites-enabled/campaign.conf'
 
 def install():
+    run("apt-get install software-properties-common")
+    run("sudo apt-add-repository universe")
+    run("sudo apt-get update")
     run("apt-get install -y --no-upgrade python-pip build-essential git libmysqlclient-dev apache2 python-dev libapache2-mod-wsgi libffi-dev libssl-dev", shell=False)
     run("pip install --upgrade pip")
     run("pip install virtualenv")
@@ -87,7 +90,8 @@ def install_mysql():
         secrets['EMAIL_HOST_USER'] = prompt('Email Host user (e.g. you@gmail.com)')
         secrets['EMAIL_PASSWORD'] = prompt('Email password:')
         secrets['EMAIL_PORT'] = int(prompt('Email Port (e.g. 587):'))
-        secrets['EMAIL_USE_TLS'] = prompt('Email use TLS (Y,N):' == 'Y')
+        secrets['EMAIL_USE_TLS'] = prompt('Email use TLS (Y,N):') == 'Y'
+        secrets['EMAIL_NOTIFICATION_ENABLED'] = prompt('Enable email notification (Y,N):') == 'Y'
         secrets['ORGANIZATION_NAME'] = prompt('Organization Name (e.g. Hindu American Foundation):')
         secrets['ORGANIZATION_URL'] = prompt('Organization URL (e.g. http://hafsite.org/:')
         secrets['ORGANIZATION_FROM_EMAIL'] = prompt('Organization From Email (e.g. no-reply@hafsite.org:')
