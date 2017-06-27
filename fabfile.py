@@ -42,6 +42,12 @@ def install_code():
 
 def install_mysql():
 
+    def python_value_as_string(value):
+        value_string = json.dumps(value)
+        if value_string == 'true' or value_string == 'false':
+            return value_string[0].upper() + value_string[1:]
+        return value_string
+
     # MySQL Install
     with settings(hide('warnings', 'stderr'), warn_only=True):
         result = sudo('dpkg-query --show mysql-server')
@@ -100,7 +106,7 @@ def install_mysql():
         temp_path = 'secret.temp'
         f = open(temp_path, 'w')
         for key, value in secrets.iteritems():
-            f.write('%s = %s' % (key, json.dumps(value))+'\n')
+            f.write('%s = %s' % (key, python_value_as_string(value))+'\n')
         f.close()
         put(temp_path, secret_path)
         os.remove(temp_path)

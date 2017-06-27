@@ -30,7 +30,7 @@ def locator(request):
     if not zipcode or not re.search(r'^(\d{5}(\-\d{4})?)$', zipcode):
         return HttpResponse('Invalid zipcode', status=422)
     
-    if chamber and (not chamber == 'senate' and not chamber == 'house'):
+    if not chamber or not chamber in [choice[0] for choice in Campaign.CHAMBER_CHOICES]:
         return HttpResponse('Invalid chamber', status=422)
 
     params = [request.GET.get(p) for p in ['street','city','state','zipcode']]
@@ -54,15 +54,16 @@ def locator(request):
     member.zipcode = request.GET.get('zipcode')
     member.save()
 
-    if chamber:
-        data = [x for x in data if x['chamber'] == chamber]
-    else:
+    if chamber == 'both':
         data = list(data)
-
-    subject = "New Call Campaign Member: %s %s" % (member.firstname, member.lastname)
-    message = '\n'.join(["%s: %s"% (k , v) for k, v in request.GET.iteritems()])
-    send_mail(subject, message, secret.ORGANIZATION_FROM_EMAIL, 
-              [secret.ORGANIZATION_NOTIFICATION_EMAIL], fail_silently=True)
+    else:
+        data = [x for x in data if x['chamber'] == chamber]
+    
+    if secret.EMAIL_NOTIFICATION_ENABLED:
+        subject = "New Call Campaign Member: %s %s" % (member.firstname, member.lastname)
+        message = '\n'.join(["%s: %s"% (k , v) for k, v in request.GET.iteritems()])
+        send_mail(subject, message, secret.ORGANIZATION_FROM_EMAIL, 
+                  [secret.ORGANIZATION_NOTIFICATION_EMAIL], fail_silently=True)
 
     return HttpResponse(json.dumps(data), content_type="application/json")
 
