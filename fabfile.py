@@ -6,14 +6,14 @@ from fabric.api import run, cd, env, settings, hide, sudo, prompt, local, put
 from fabric.contrib.files import exists, upload_template
 from fabric.utils import warn
 
-env.hosts = ['root@162.243.102.184']
+env.hosts = ['root@45.55.170.106']
 
 rootdir = "/var/www/"
 homedir = rootdir + "campaign/"
 apache_conf = '/etc/apache2/sites-enabled/campaign.conf'
 
 def install():
-    run("apt-get install -y --no-upgrade python-pip build-essential git libmysqlclient-dev apache2 python-dev libapache2-mod-wsgi", shell=False)
+    run("apt-get install -y --no-upgrade python-pip build-essential git libmysqlclient-dev apache2 python-dev libapache2-mod-wsgi libffi-dev libssl-dev", shell=False)
     run("pip install --upgrade pip")
     run("pip install virtualenv")
     install_mysql()
